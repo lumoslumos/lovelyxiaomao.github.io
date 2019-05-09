@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        @font-face{
+            font-family:myFont;
+            src:url('static/lib/xjlFont.fon');
+        }
+        *{
+            font-family: myFont;
+        }
+        .media-body{
+            padding-top: 5%;
+            padding-left: 3%;
+        }
+    </style>
+
+    <script src="static/js/jquery-3.3.1.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+</head>
+<body>
+<div id="mymodal" class="modal fade bs-example-modal-sm">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content" id="modal-content">
+            <div class="modal-header" id="modal-header">
+                <button class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title" >你好呀</h5>
+            </div>
+            <div class="media-body" id="media-body">
+                <p id="body_info" class="">我们那时还在一起吗？</p>
+            </div>
+            <div class="modal-footer" id="modal-footer">
+                <button class="btn btn-success " data-dismiss="modal" onclick="successHandle()" id="btn_danger">在</button>
+                <button class="btn btn-danger " data-dismiss="modal" onclick="dangerHandle()" id="btn_confirm">不在</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <audio autoplay loop>
+        <source src="static/lib/陈鸿宇%20-%20行歌.mp3">
+    </audio>
+    <div id="divTyping" style="font-family: myFont;font-size: 20px"></div>
+    <div id="continue" style="font-family: myFont;font-size: 20px"></div>
+    <!--<button onclick="clickHandle()">dianji</button>-->
+    <script>
+        function successHandle(){
+            localStorage.setItem('flag',true);
+            typingContinue1();
+
+        }
+        function dangerHandle(){
+            localStorage.setItem('flag',false);
+
+            typingContinue2();
+        }
+
+
+        let str = '啊 小猫 </br>恭喜你，你找到了这份礼物 </br>我不知道你看到这个的时候， 我们是否还在一起？ 我是否还有资格留在你身边？</br>' +
+            '我真的很想留在你身边陪你一起面对未来的风风雨雨、为你造一座城堡、不让任何人伤害你 ,让你每天开开心心的。</br> ' +
+            '真的很对不起，身为你的师父，不能带给你更多的益处，却让你越来越迷茫，对不起，</br>' +
+            '我也不知道为什么我们的感情突然就变成了这样，</br> ' +
+            '但尽人事 、听天命。</br>我们两个都尽自己全力去爱对方，这样即使这段感情最后没有什么好的结果，我依旧会感叹生命的美好，依旧会感谢我们的相遇。</br>' +
+            '就像我昨天说的遇见你真的耗费了我太多的运气，我只顾着庆幸去年的那一天我不小心成为了你的师父，只顾着庆幸今年的那一天你恰好想起了你的这个师父。</br>' +
+            '我不知道如果没有那天，没有那些事，我们现在会身在何处，又陪着何样的人，但是我知道，那样我们一辈子可能都不会再相遇了。</br>谢谢你，谢谢你的出现，我爱你。</br>' +
+            '我们每个人从出生开始就是一个人，到死的时候也是一个人，</br>' +
+            '人啊，天生就是孤独的，想起了那句话， </br>“也许是 因这现世还不够残忍凉薄 于是便有了诗作，也许是 因上帝与人类都生来寂寞 于是我们相遇了”</br>' +
+            '我们每个人都孤独的感知着世界，在这繁华的世界走走停停，偶因路边的小花驻足，偶因天边的云彩踌躇，偶因一些人感叹生命的美好，这就是相遇。</br>' +
+            '它不一定会给你好的结果，但它会给你新的启迪，无论好坏，这都是一段经历。</br>'+
+            '我也不知道为什么，我的心在这两天总是不安的，所以我写了两个版本的话给你。</br>' ;
+
+        let yes='<br>谢谢你打算继续咱们的这段感情，我真的很开心你看到这段话。</br>这意味着我们两个都选择了正视彼此的这段感情，虽然不知道最后的结果是怎么样的但是真的很谢谢你的这份选择。</br>' +
+            ' 也不知道为什么，从遇见你开始，其实我就有一种很奇特的感觉。</br>我想，这就是我为什么在那天谁都没理的情况下回了你的原因 ，</br>直到现在我依旧不知道什么力量支撑着我们到现在这一步，</br>可能真的是爱情吧，不然怎么会如此奇妙。</br>' +
+            '但我想我们应该会陪伴彼此很久很久的呢。</br>啊，我现在正在幻想着假如你真的选择了继续和我在一起时的样子。</br>我已经激动的不知道说些什么好了，我的心跳好快。谢谢你。</br>' +
+            '啊，我也不知道该说些什么了，但无妨，</br>来日方长，往后的余生就让我陪着你好吗？</br>我真的很爱你，不知道这首歌现在放到哪里了，但</br>让我们彼此分享互相陪伴吧  ，' +
+            '一起面对人生这一刻的孤独吧。</br>   --2019.5.9 18:06';
+
+        let no='<br>其实我知道你更大的可能，是选择了和我分开。 </br>但无论那时如何 ，我现在真的很爱你。 </br>以后你的师父可能不能一直陪着你了， </br>我希望你能答应我好好的活下去，开开心心的，这真的是我对你最大的愿望了 </br>' +
+            '我一直是个很自私的人， </br>我也不知道什么开始有了想要保护你的想法， </br>我也不知道什么时候开始为你的开心而开心，为你的难过而难过， </br>都怪我，情不自禁。 </br>对不起，如果我没有那样的感情，我们也许还会是好好的师徒 </br>' +
+            '我可以一直陪着你，保护着你。 </br>我真的很没用， 我不知道除了说对不起， 我还能做些什么 </br>你说几十年后的我们， 会是怎么样的呢？ 过着怎样的生活？  想着怎样的人？ </br> 是否还会想起， 在几十年前的某一天， 我们曾经相遇过。 </br> 我们又会如何去向他人诉说我们的这段缘分呢。 </br>'  +
+            '是欣喜、 是懊恼、 是悔恨、 还是  怀念呢? </br>' +
+            '时光真的是很神奇的东西。 </br> 还记得那天， 我们都爱的那么深，彼此都不愿意离开对方 。</br> 没想到竟然到了今天的这一步， </br> 这或许真的是上天给我们开的一份玩笑吧。 </br> 不知道下一个让你觉得幸运的男孩子是什么样的呢 ？ </br>希望他能比我对你更好 ，比我更爱你 ，比我更能成为让你活下去的理由 。</br>' +
+            '我的想法到现在也没有变， </br>' +
+            '只要你能够更快乐，就算那个人不是我 </br>' +
+            '我也会接受， </br>' +
+            '虽然我会不甘心，但我依旧替你开心 。</br>' +
+            '愿他在那时还能替我抱抱你， </br>' +
+            '我也想知道那个能让你喜欢上的男孩子究竟是什么样的， </br>' +
+            '我好想亲口告诉他 ：</br> ' +
+            '我家的小猫喜欢吃海鲜、喜欢吃甜点、喜欢吃牛排、喜欢吃流黄的鸡蛋， </br>' +
+            '喜欢温柔的人、喜欢有礼貌的人、喜欢有思想的人， </br>' +
+            '不喜欢吃韭菜、不喜欢吃豆腐干、不喜欢吃青菜、不喜欢吃熟的鸡蛋， </br>' +
+            '小猫有胃病、有抑郁症、有颈椎病、心脏跳的很慢，不能很长时间不吃饭、喜欢旅游、喜欢体验不同的风俗人情、喜欢环游世界、喜欢小裙子、喜欢温柔的对待这个世界 </br>' +
+            '怕狗、怕冷、...  </br>' +
+            '可是， </br>' +
+            '为什么那个人不是我啊！ </br>' +
+            '我真的很爱你很爱你。</br>' +
+            '这是一个会长期被我更新的网站， </br>' +
+            '我会在下面不断的开拓一些板块， </br>' +
+            '即使我不在了你也可以根据我提供给你这些板块继续去学习， </br>' +
+            '使自己变的更好， </br>' +
+            '谢谢你愿意看我写的这些， </br>' +
+            '惟愿你能被世界温柔以待， </br>' +
+            '也愿 小猫你前途无量。 </br>' +
+            '我爱你 </br>' +
+            '如果可以我真的希望你永远看不到这段话 </br>  --2019.5.9 19:20';
+
+        let i =0;
+        function typing(){
+            let divTyping = document.getElementById('divTyping');
+            if (i <= str.length) {
+                divTyping.innerHTML = str.slice(0, i++) + '_';
+                setTimeout('typing()', 230);//&#x9012;&#x5f52;&#x8c03;&#x7528; 230
+            }
+            else{
+                divTyping.innerHTML = str;//&#x7ed3;&#x675f;&#x6253;&#x5b57;,&#x79fb;&#x9664; _ &#x5149;&#x6807;
+                $('#mymodal').modal();
+            }
+        }
+        let j=0;
+        function typingContinue1(){
+            let div = document.getElementById('continue');
+            if (j <= yes.length) {
+                div.innerHTML = yes.slice(0, j++) + '_';
+                setTimeout('typingContinue1()', 195);//&#x9012;&#x5f52;&#x8c03;&#x7528;
+            }
+            else{
+                div.innerHTML = yes;//&#x7ed3;&#x675f;&#x6253;&#x5b57;,&#x79fb;&#x9664; _ &#x5149;&#x6807;
+            }
+        }
+        let k=0;
+        function typingContinue2(){
+            let div = document.getElementById('continue');
+            if (k <= no.length) {
+                div.innerHTML = no.slice(0, k++) + '_';
+                setTimeout('typingContinue2()', 200);//&#x9012;&#x5f52;&#x8c03;&#x7528;
+            }
+            else{
+                div.innerHTML = no;//&#x7ed3;&#x675f;&#x6253;&#x5b57;,&#x79fb;&#x9664; _ &#x5149;&#x6807;
+            }
+        }
+        window.onload=()=> {
+            typing();
+        }
+    </script>
+</body>
+</html>
